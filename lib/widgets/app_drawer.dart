@@ -54,8 +54,7 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final esProfesor = usuario.rol == 'teacher';
-
+    //final esProfesor = usuario.rol == 'teacher';
     return Drawer(
       backgroundColor: Color(0xFF52BC8B), // fondo verde claro
       child: Column(
@@ -66,6 +65,7 @@ class AppDrawer extends StatelessWidget {
             ),
             accountName: Text(usuario.username, style: TextStyle(color: Colors.black)),
             accountEmail: Text(usuario.rol == 'teacher' ? 'Profesor' : 'Alumno', style: TextStyle(color: Colors.black)),
+            //icono del avatar en el sidebar
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Icon(Icons.person, size: 35, color: Colors.black),
@@ -76,14 +76,18 @@ class AppDrawer extends StatelessWidget {
             label: 'Dashboard',
             route: '/dashboard',
           ),
-          if (esProfesor) ...[
-            buildDrawerItem(icon: Icons.people, label: 'Estudiantes', route: '/estudiantes'),
-            buildDrawerItem(icon: Icons.book, label: 'Materias', route: '/materias'),
-            buildDrawerItem(icon: Icons.class_, label: 'Cursos', route: '/cursos'),
+          if (usuario.rol=='teacher') ...[
+            //buildDrawerItem(icon: Icons.people, label: 'Estudiantes', route: '/estudiantes'),
+            //buildDrawerItem(icon: Icons.book, label: 'Materias', route: '/materias'),
+            //buildDrawerItem(icon: Icons.class_, label: 'Cursos', route: '/cursos'),
+            buildDrawerItem(icon: Icons.grade, label: 'Registro de Notas', route: '/notas'),
             buildDrawerItem(icon: Icons.event_available, label: 'Asistencias', route: '/asistencias'),
             buildDrawerItem(icon: Icons.record_voice_over, label: 'Participaciones', route: '/participaciones'),
-            buildDrawerItem(icon: Icons.grade, label: 'Registro de Notas', route: '/notas'),
             buildDrawerItem(icon: Icons.analytics, label: 'Predicciones IA', route: '/predicciones'),
+          ],
+          // Items para estudiante
+          if (usuario.rol=='student') ...[
+            buildDrawerItem(icon: Icons.dashboard, label: 'Dashboard', route: '/student/dashboard'),
           ],
           Spacer(),
           Divider(color: Colors.black54),
