@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import '../../models/user.dart';
 import '../../widgets/app_drawer.dart';
 // lib/screens/teacher/dashboard.dart
-import 'package:flutter/material.dart';
-import '../../models/user.dart';
-import '../../widgets/app_drawer.dart';
-import 'registro_notas.dart';
-import 'asistencia.dart';
-import 'participaciones.dart';
-import 'prediccionesrendimiento.dart';
-import 'package:flutter/material.dart';
-import '../../models/user.dart';
-import '../../widgets/app_drawer.dart';
+//import 'package:flutter/material.dart';
+//import '../../models/user.dart';
+//import '../../widgets/app_drawer.dart';
+//import 'registro_notas.dart';
+//import 'asistencia.dart';
+//import 'participaciones.dart';
+//import 'prediccionesrendimiento.dart';
+//import 'package:flutter/material.dart';
+//import '../../models/user.dart';
+//import '../../widgets/app_drawer.dart';
 
 class TeacherDashboard extends StatelessWidget {
   final Usuario usuario;
+  const TeacherDashboard({super.key, required this.usuario});
 
-  const TeacherDashboard({Key? key, required this.usuario}) : super(key: key);
+  //const TeacherDashboard({Key? key, required this.usuario}) : super(key: key);
 
   void navegar(BuildContext context, String ruta) {
     Navigator.pop(context); // cerrar el drawer

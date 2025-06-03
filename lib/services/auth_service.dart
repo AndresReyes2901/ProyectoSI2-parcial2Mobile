@@ -1,4 +1,5 @@
 // lib/services/auth_service.dart
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -8,32 +9,24 @@ class AuthService {
   Future<Map<String, dynamic>?> login(String username, String password) async {
     final url = Uri.parse('$baseUrl/auth/login');
 
-    final response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username, 'password': password}),
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'username': username, 'password': password}),
+      );
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body); // incluye token, usuario, rol, etc.
-    } else {
-      return null; // o lanzar una excepción personalizada
+      print('Código de estado: ${response.statusCode}');
+      print('Cuerpo de la respuesta: ${response.body}');
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body); // Espera JSON con token, user, rol, etc.
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error en la solicitud de login: $e');
+      return null;
     }
   }
 }
-
-/*
-class AuthService {
-  static Future<String?> login(String username, String password) async {
-    // Simular llamada a API
-    await Future.delayed(Duration(seconds: 2));
-
-    // Datos simulados
-    if (username == 'admin' && password == 'admin123') return 'admin';
-    if (username == 'profesor' && password == 'prof123') return 'teacher';
-    if (username == 'alumno' && password == 'alum123') return 'student';
-
-    return null; // Error de autenticación
-  }
-}
-*/

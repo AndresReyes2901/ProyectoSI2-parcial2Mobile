@@ -1,15 +1,12 @@
 // lib/screens/student/student_dashboard.dart
 import 'package:flutter/material.dart';
-
-// lib/screens/student/student_dashboard.dart
-//import 'package:flutter/material.dart';
 import '../../models/user.dart';
 import '../../widgets/app_drawer.dart';
 
 class StudentDashboard extends StatelessWidget {
-  final Usuario usuario = Usuario(username: 'Carlos', rol: 'student');
+  final Usuario usuario;
 
-  StudentDashboard({super.key});
+  const StudentDashboard({Key? key, required this.usuario}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +16,13 @@ class StudentDashboard extends StatelessWidget {
         usuario: usuario,
         selectedRoute: '/student/dashboard',
         onNavigate: (ruta) {
-          Navigator.pop(context);
-          Navigator.pushNamed(context, ruta);
+          Navigator.pop(context); // Cierra el drawer
+          Navigator.pushNamed(context, ruta); // Navega a la ruta seleccionada
         },
       ),
-      body: const Center(
-        child: Text('Bienvenido, Estudiante'),
+      body: Center(
+        child: Text('Bienvenido, ${usuario.username}'),
       ),
     );
   }
 }
-
