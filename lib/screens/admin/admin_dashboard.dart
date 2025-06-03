@@ -14,8 +14,8 @@ class AdminDashboard extends StatelessWidget {
 }
 
 // lib/screens/teacher_dashboard.dart
-class TeacherDashboard extends StatelessWidget {
-  const TeacherDashboard({super.key});
+class TeacherDashboardPrueba extends StatelessWidget {
+  const TeacherDashboardPrueba({super.key});
 
   @override
   Widget build(BuildContext context) {

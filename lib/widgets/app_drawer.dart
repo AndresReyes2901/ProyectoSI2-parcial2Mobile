@@ -4,63 +4,90 @@ import '../models/user.dart';
 
 class AppDrawer extends StatelessWidget {
   final Usuario usuario;
+  final String selectedRoute;
   final Function(String ruta) onNavigate;
 
   const AppDrawer({
     super.key,
     required this.usuario,
+    required this.selectedRoute,
     required this.onNavigate,
   });
+
+  Widget buildDrawerItem({
+    required IconData icon,
+    required String label,
+    required String route,
+  }) {
+    final bool isSelected = selectedRoute == route;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () => onNavigate(route),
+        child: Container(
+          decoration: isSelected
+              ? BoxDecoration(
+            color: Color(0xFF7E59C0), // morado seleccionado
+            borderRadius: BorderRadius.circular(12),
+          )
+              : null,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Row(
+            children: [
+              Icon(icon, color: isSelected ? Colors.white : Colors.black),
+              SizedBox(width: 12),
+              Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final esProfesor = usuario.rol == 'teacher';
 
     return Drawer(
+      backgroundColor: Color(0xFF52BC8B), // fondo verde claro
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text(usuario.username),
-            accountEmail: Text(usuario.rol == 'teacher' ? 'Profesor' : 'Alumno'),
+            decoration: BoxDecoration(
+              color: Color(0xFF52BC8B),
+            ),
+            accountName: Text(usuario.username, style: TextStyle(color: Colors.black)),
+            accountEmail: Text(usuario.rol == 'teacher' ? 'Profesor' : 'Alumno', style: TextStyle(color: Colors.black)),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
-              child: Icon(Icons.person, size: 35),
+              child: Icon(Icons.person, size: 35, color: Colors.black),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.dashboard),
-            title: Text('Inicio'),
-            onTap: () => onNavigate('/dashboard'),
+          buildDrawerItem(
+            icon: Icons.dashboard,
+            label: 'Dashboard',
+            route: '/dashboard',
           ),
           if (esProfesor) ...[
-            ListTile(
-              leading: Icon(Icons.grade),
-              title: Text('Registro de notas'),
-              onTap: () => onNavigate('/notas'),
-            ),
-            ListTile(
-              leading: Icon(Icons.event_available),
-              title: Text('Asistencias'),
-              onTap: () => onNavigate('/asistencias'),
-            ),
-            ListTile(
-              leading: Icon(Icons.record_voice_over),
-              title: Text('Participaciones'),
-              onTap: () => onNavigate('/participaciones'),
-            ),
-            ListTile(
-              leading: Icon(Icons.analytics),
-              title: Text('Predicciones IA'),
-              onTap: () => onNavigate('/predicciones'),
-            ),
+            buildDrawerItem(icon: Icons.people, label: 'Estudiantes', route: '/estudiantes'),
+            buildDrawerItem(icon: Icons.book, label: 'Materias', route: '/materias'),
+            buildDrawerItem(icon: Icons.class_, label: 'Cursos', route: '/cursos'),
+            buildDrawerItem(icon: Icons.event_available, label: 'Asistencias', route: '/asistencias'),
+            buildDrawerItem(icon: Icons.record_voice_over, label: 'Participaciones', route: '/participaciones'),
+            buildDrawerItem(icon: Icons.grade, label: 'Registro de Notas', route: '/notas'),
+            buildDrawerItem(icon: Icons.analytics, label: 'Predicciones IA', route: '/predicciones'),
           ],
           Spacer(),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Configuración'),
-            onTap: () => onNavigate('/configuracion'),
-          ),
+          Divider(color: Colors.black54),
+          buildDrawerItem(icon: Icons.settings, label: 'Configuración', route: '/configuracion'),
         ],
       ),
     );

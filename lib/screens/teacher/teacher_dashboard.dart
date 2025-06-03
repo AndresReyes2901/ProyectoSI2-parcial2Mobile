@@ -19,7 +19,11 @@ class TeacherDashboard extends StatelessWidget {
       appBar: AppBar(title: Text('Panel Profesor')),
       drawer: AppDrawer(
         usuario: usuario,
-        onNavigate: (ruta) => navegar(context, ruta),
+        selectedRoute:'/participaciones',//o cualquier ruta
+        onNavigate: (ruta) {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, ruta);
+        },
       ),
       body: Center(child: Text('Bienvenido, Profesor')),
     );
