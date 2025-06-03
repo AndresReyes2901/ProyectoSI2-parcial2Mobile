@@ -8,8 +8,8 @@ plugins {
 android {
     namespace = "com.example.aulainteligente"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
-
+    //ndkVersion = flutter.ndkVersion
+	ndkVersion = "25.2.9519653"
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

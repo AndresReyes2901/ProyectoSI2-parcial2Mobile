@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/login/login_screen.dart';
 import '/screens/admin/admin_dashboard.dart';
 import '/screens/teacher/teacher_dashboard.dart';
+import '/screens/student/dashboard.dart';
 //import 'screens/student_dashboard.dart';
 
 void main() {
@@ -21,12 +22,12 @@ class MyApp extends StatelessWidget {
         '/':(_)=>const LoginScreen(),
         '/admin': (_) => const AdminDashboard(),
         '/teacher': (_) =>  TeacherDashboard(),
-        '/student': (_) => const StudentDashboard(),
+       // '/student': (_) => const StudentDashboard(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: LoginScreen(),
     );
   }
 }
@@ -55,12 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
+
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+
         title: Text(widget.title),
       ),
       body: Center(
